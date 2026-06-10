@@ -1,0 +1,19 @@
+{
+  "name": "bidv-claude-workshop",
+  "version": "1.0.0",
+  "description": "BMAD Workshop - Loan Application Tracker API",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
