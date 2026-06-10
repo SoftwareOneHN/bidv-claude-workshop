@@ -18,7 +18,7 @@ Task(subagent_type="researcher", prompt="Research [topic]. Report ≤150 lines."
 ```
 Task(subagent_type="scout", prompt="Find files related to [feature] in codebase", description="Scout [feature]")
 ```
-- Use `/ck:scout ext` (preferred) or `/ck:scout` (fallback)
+- Use `/scout ext` (preferred) or `/scout` (fallback)
 
 ## Planning Phase
 ```
@@ -87,7 +87,7 @@ Task(subagent_type="code-simplifier", prompt="Simplify these files while preserv
 - Skip when `CK_SIMPLIFY_DISABLED=1` or `.ck.json` `simplify.gate.enabled=false`
 
 ## Project Management
-Activate the `/ck:project-management` skill (MANDATORY at Finalize — not a subagent):
+Activate the `/project-management` skill (MANDATORY at Finalize — not a subagent):
 > Run full sync-back in [plan-path]: reconcile completed tasks with all phase files, backfill stale completed checkboxes across all phases, update plan.md status/progress, and report unresolved mappings.
 
 ## Documentation

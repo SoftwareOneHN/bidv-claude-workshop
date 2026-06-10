@@ -1,5 +1,5 @@
 ---
-name: ck:cook
+name: cook
 description: "Implement features, plans, and fixes with structured workflow. Use for feature development, plan execution, code implementation pipelines."
 user-invocable: true
 when_to_use: "Invoke to implement known scope after requirements are clear."
@@ -20,7 +20,7 @@ End-to-end implementation with automatic workflow detection.
 ## Usage
 
 ```
-/ck:cook <natural language task OR plan path>
+/cook <natural language task OR plan path>
 ```
 
 **IMPORTANT:** If no flag is provided, the skill will use the `interactive` mode by default for the workflow.
@@ -38,9 +38,9 @@ End-to-end implementation with automatic workflow detection.
 
 **Example:**
 ```
-/ck:cook "Add user authentication to the app" --fast
-/ck:cook path/to/plan.md --auto
-/ck:cook "Refactor auth middleware" --tdd
+/cook "Add user authentication to the app" --fast
+/cook path/to/plan.md --auto
+/cook "Refactor auth middleware" --tdd
 ```
 
 <HARD-GATE>
@@ -195,23 +195,23 @@ Human review required at these checkpoints (skipped with `--auto`):
   Pass scout summary + acceptance criteria as context. If reviewer flags side effects → trigger HARD-GATE-NO-SIDE-EFFECTS (`AskUserQuestion` with 2-4 options).
   Then: User approval OR artifact-gated auto approval. Score is advisory; it never approves by itself.
 - **Finalize (MANDATORY - never skip):**
-  1. **Activate `/ck:project-management` skill (MANDATORY)** → run full plan sync-back across ALL `phase-XX-*.md` (not only current phase), update `plan.md` status/progress, hydrate Claude Tasks, generate progress report
+  1. **Activate `/project-management` skill (MANDATORY)** → run full plan sync-back across ALL `phase-XX-*.md` (not only current phase), update `plan.md` status/progress, hydrate Claude Tasks, generate progress report
   2. `docs-manager` subagent → update `./docs` if changes warrant
   3. `TaskUpdate` → mark all Claude Tasks complete after sync-back verification (skip if Task tools unavailable)
   4. Ask user if they want to commit via `git-manager` subagent
-  5. Run `/ck:journal` to write a concise technical journal entry upon completion
+  5. Run `/journal` to write a concise technical journal entry upon completion
 
 ## Required Subagents (MANDATORY)
 
 | Phase | Subagent | Requirement |
 |-------|----------|-------------|
 | Research | `researcher` | Optional in fast/code |
-| Scout | `ck:scout` | Optional in code |
+| Scout | `scout` | Optional in code |
 | Plan | `planner` | Optional in code |
 | UI Work | `ui-ux-designer` | If frontend work |
 | Testing | `tester`, `debugger` | **MUST** spawn |
 | Review | `code-reviewer` | **MUST** spawn |
-| Finalize | `/ck:project-management` skill + `docs-manager`, `git-manager` subagents | **MUST** invoke all |
+| Finalize | `/project-management` skill + `docs-manager`, `git-manager` subagents | **MUST** invoke all |
 
 **CRITICAL ENFORCEMENT:**
 - Steps 4, 5, 6 **MUST** use Task tool to spawn subagents
@@ -229,6 +229,6 @@ Human review required at these checkpoints (skipped with `--auto`):
 
 ## Workflow Position
 
-**Typically follows:** `/ck:plan` (execute a plan), `/ck:brainstorm` (implement agreed solution)
-**Typically precedes:** `/ck:code-review` (review after implementation), `/ck:test` (validate changes)
-**Related:** `/ck:fix` (alternative for bug fixes), `/ck:plan` (create plan before cooking)
+**Typically follows:** `/plan` (execute a plan), `/brainstorm` (implement agreed solution)
+**Typically precedes:** `/code-review` (review after implementation), `/test` (validate changes)
+**Related:** `/fix` (alternative for bug fixes), `/plan` (create plan before cooking)

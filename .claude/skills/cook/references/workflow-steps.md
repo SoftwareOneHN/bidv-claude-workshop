@@ -17,7 +17,7 @@ All modes share core steps with mode-specific variations.
 
 **Interactive/Auto:**
 - Spawn multiple `researcher` agents in parallel
-- Use `/ck:scout ext` or `scout` agent for codebase search
+- Use `/scout ext` or `scout` agent for codebase search
 - Keep reports ≤150 lines
 
 **Parallel:**
@@ -37,11 +37,11 @@ All modes share core steps with mode-specific variations.
 - Create `plan.md` + `phase-XX-*.md` files
 
 **Fast:**
-- Use `/ck:plan --fast` with scout results only
+- Use `/plan --fast` with scout results only
 - Minimal planning, focus on action
 
 **Parallel:**
-- Use `/ck:plan --parallel` for dependency graph + file ownership matrix
+- Use `/plan --parallel` for dependency graph + file ownership matrix
 
 **Code:**
 - Skip - plan already exists
@@ -52,7 +52,7 @@ All modes share core steps with mode-specific variations.
 ### [Review Gate 2] Post-Plan (skip if auto mode)
 - Present plan overview with phases
 - Use `AskUserQuestion` to ask: "Validate the plan or approve plan to start implementation?" - "Validate" / "Approve" / "Abort" / "Other" ("Request revisions")
-  - "Validate": run `/ck:plan validate` skill invocation
+  - "Validate": run `/plan validate` skill invocation
   - "Approve": continue to implementation
   - "Abort": stop the workflow
   - "Other": revise the plan based on user's feedback
@@ -103,7 +103,7 @@ the refactor broke something and must be fixed before the workflow proceeds.
 - Use `TaskUpdate` to mark tasks as `in_progress` immediately.
 - Execute phase tasks sequentially (Step 3.1, 3.2, etc.)
 - Use `ui-ux-designer` for frontend
-- Use `ck:ai-multimodal` for image assets
+- Use `ai-multimodal` for image assets
 - Run type checking after each file
 
 **Parallel mode:**
@@ -202,7 +202,7 @@ For high-risk `--auto`, stop with AskUserQuestion before finalize/commit/ship un
 ## Step 6: Finalize
 
 **All modes - MANDATORY subagents (NON-NEGOTIABLE):**
-1. **MUST** activate `/ck:project-management` skill (MANDATORY) — run full sync-back for [plan-path]: reconcile all completed Claude Tasks with all phase files, backfill stale completed checkboxes across every phase, then update plan.md frontmatter/table progress. Do NOT only mark current phase.
+1. **MUST** activate `/project-management` skill (MANDATORY) — run full sync-back for [plan-path]: reconcile all completed Claude Tasks with all phase files, backfill stale completed checkboxes across every phase, then update plan.md frontmatter/table progress. Do NOT only mark current phase.
 2. **MUST** spawn in parallel:
    - `Task(subagent_type="docs-manager", prompt="Update docs for changes.", description="Update docs")`
 3. Project-management sync-back MUST include:
@@ -232,7 +232,7 @@ only change the Status column cell, preserve table structure.
 5. Onboarding check (API keys, env vars)
 6. **MUST** spawn git subagent: `Task(subagent_type="git-manager", prompt="Stage and commit changes", description="Commit")`
 
-**CRITICAL:** Step 6 is INCOMPLETE without activating `/ck:project-management` skill AND spawning `docs-manager` + `git-manager` subagents. DO NOT skip.
+**CRITICAL:** Step 6 is INCOMPLETE without activating `/project-management` skill AND spawning `docs-manager` + `git-manager` subagents. DO NOT skip.
 
 **Auto mode:** Continue to next phase automatically, start from **Step 3**.
 **Others:** Ask user before next phase
@@ -260,7 +260,7 @@ code:        0 → skip → skip → 3 → [R] → 4 → [R] → 5(user) → 6
 - **MANDATORY DELEGATION:** Steps 4, 5, 6 MUST delegate via Task tool / skill activation. DO NOT implement directly.
   - Step 4: `tester` (and `debugger` if failures)
   - Step 5: `code-reviewer`
-  - Step 6: `/ck:project-management` skill, `docs-manager`, `git-manager`
+  - Step 6: `/project-management` skill, `docs-manager`, `git-manager`
 - Use `TaskCreate` to create Claude Tasks for each unchecked item with priority order and dependencies (or `TodoWrite` if Task tools unavailable).
 - Use `TaskUpdate` to mark Claude Tasks `in_progress` when picking up a task (skip if Task tools unavailable).
 - Use `TaskUpdate` to mark Claude Tasks `complete` immediately after finalizing the task (skip if Task tools unavailable).

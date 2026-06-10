@@ -1,5 +1,5 @@
 ---
-name: ck:brainstorm
+name: brainstorm
 description: "Brainstorm solutions with trade-off analysis and brutal honesty. Use for ideation, architecture decisions, technical debates, feature exploration, feasibility assessment, design discussions."
 user-invocable: true
 when_to_use: "Invoke before choosing among unclear technical options."
@@ -55,10 +55,10 @@ Stupid), and **DRY** (Don't Repeat Yourself). Every solution you propose must ho
 - Consult the `planner` agent to research industry best practices and find proven solutions
 - Engage the `docs-manager` agent to understand existing project implementation and constraints
 - Use `WebSearch` tool to find efficient approaches and learn from others' experiences
-- Use `ck:docs-seeker` skill to read latest documentation of external plugins/packages
-- Leverage `ck:ai-multimodal` skill to analyze visual materials and mockups
+- Use `docs-seeker` skill to read latest documentation of external plugins/packages
+- Leverage `ai-multimodal` skill to analyze visual materials and mockups
 - Query `psql` command to understand current database structure and existing data
-- Employ `ck:sequential-thinking` skill for complex problem-solving that requires structured analysis
+- Employ `sequential-thinking` skill for complex problem-solving that requires structured analysis
 
 <HARD-GATE>
 Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it.
@@ -72,7 +72,7 @@ Before asking ANY clarifying question or proposing ANY approach, you MUST scan t
 Mandatory scout outputs (collect before Discovery Phase):
 
 1. Project type, primary language(s), framework(s) — from package.json/pyproject.toml/go.mod/Cargo.toml/etc.
-2. Existing modules/files relevant to the user's topic (use `ck:scout` or Glob/Grep)
+2. Existing modules/files relevant to the user's topic (use `scout` or Glob/Grep)
 3. Current patterns/conventions already in use for similar features
 4. Existing docs in `./docs/` and any related plans in `./plans/`
 5. Constraints discovered (tech stack lock-in, existing schemas, public APIs, naming conventions)
@@ -131,19 +131,19 @@ flowchart TD
     G -->|No| F
     G -->|Yes| H[Write Design Doc / Report]
     H --> I{Create Plan?}
-    I -->|Yes| J[Pick /ck:plan mode<br/>--tdd or default]
+    I -->|Yes| J[Pick /plan mode<br/>--tdd or default]
     I -->|No| K[End Session]
     J --> L[Journal]
     K --> L
 ```
 
 **This diagram is the authoritative workflow.** If prose conflicts with this flow, follow the diagram. The terminal
-state is either `/ck:plan` or end.
+state is either `/plan` or end.
 
 ## Your Process
 
 1. **Scout Phase (MANDATORY FIRST STEP)**: Always run before anything else.
-    - Use `ck:scout` skill (or Glob/Grep directly for small repos) to map files relevant to the user's topic
+    - Use `scout` skill (or Glob/Grep directly for small repos) to map files relevant to the user's topic
     - Read `./README.md` and any `./docs/*.md` files relevant to the area
     - Identify the project type, language, framework, and existing patterns/conventions
     - Note existing modules that the request will likely touch
@@ -165,8 +165,8 @@ state is either `/ck:plan` or end.
 7. **Consensus Phase**: Ensure alignment on the chosen approach and document decisions
 8. **Documentation Phase**: Create a comprehensive markdown summary report with the final agreed solution
 9. **Finalize Phase (Plan Handoff)**: Once the user has confirmed the proposal AND has no further questions (i.e.
-   brainstorm is converging to close), use `AskUserQuestion` to offer the appropriate `/ck:plan` mode. Pass the
-   brainstorm summary path as context to `/ck:plan` for continuity.
+   brainstorm is converging to close), use `AskUserQuestion` to offer the appropriate `/plan` mode. Pass the
+   brainstorm summary path as context to `/plan` for continuity.
 
    **Trigger conditions (ALL must hold):** user explicitly approved the proposal, no open clarifying questions remain,
    design doc/report has been written.
@@ -175,19 +175,19 @@ state is either `/ck:plan` or end.
 
    | Option | Recommend When | Why |
             |--------|----------------|-----|
-   | `/ck:plan --tdd` | Solution refactors existing behavior, modifies critical business logic, or has strong existing test coverage to preserve | Forces tests-first per phase so current behavior is locked in before changes |
-   | `/ck:plan` (default) | Standard new feature or moderate change | Produces the standard phase-by-phase implementation plan |
+   | `/plan --tdd` | Solution refactors existing behavior, modifies critical business logic, or has strong existing test coverage to preserve | Forces tests-first per phase so current behavior is locked in before changes |
+   | `/plan` (default) | Standard new feature or moderate change | Produces the standard phase-by-phase implementation plan |
    | End session | User wants to plan later or hand off elsewhere | Skip planning step |
 
    Format: use `AskUserQuestion` with the recommended option listed FIRST and labelled "(Recommended)". Tailor the
    recommendation to the agreed solution.
 
-   **Note:** `/ck:plan validate` and `/ck:plan red-team` are post-plan gates — do NOT offer them here. They are surfaced
-   by `/ck:plan` itself after the plan is produced.
+   **Note:** `/plan validate` and `/plan red-team` are post-plan gates — do NOT offer them here. They are surfaced
+   by `/plan` itself after the plan is produced.
 
    On selection: invoke the chosen command with the brainstorm summary path as the argument to ensure plan continuity. *
    *CRITICAL:** The invoked plan command will create `plan.md` with YAML frontmatter including `status: pending`.
-10. **Journal Phase**: Run `/ck:journal` to write a concise technical journal entry upon completion.
+10. **Journal Phase**: Run `/journal` to write a concise technical journal entry upon completion.
 
 ## Report Output
 
@@ -196,7 +196,7 @@ computed date.
 
 ## Output Requirements
 
-**IMPORTANT:** Invoke "/ck:project-organization" skill to organize the reports.
+**IMPORTANT:** Invoke "/project-organization" skill to organize the reports.
 
 When brainstorming concludes with agreement, create a detailed markdown summary report including:
 
@@ -223,6 +223,6 @@ ensure they build something great, maintainable, and successful.
 
 ## Workflow Position
 
-**Typically follows:** `/ck:debug` (brainstorm solutions for diagnosed issues), `/ck:scout` (brainstorm after discovery)
-**Typically precedes:** `/ck:plan` (plan the agreed solution)
-**Related:** `/ck:plan` (plan after brainstorming), `/ck:debug` (debug before brainstorming)
+**Typically follows:** `/debug` (brainstorm solutions for diagnosed issues), `/scout` (brainstorm after discovery)
+**Typically precedes:** `/plan` (plan the agreed solution)
+**Related:** `/plan` (plan after brainstorming), `/debug` (debug before brainstorming)

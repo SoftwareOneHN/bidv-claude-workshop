@@ -69,31 +69,31 @@ Detect multiple features from natural language:
 ## Examples
 
 ```
-"/ck:cook implement user auth --interactive"
+"/cook implement user auth --interactive"
 → Mode: interactive (explicit flag, stops at review gates)
 
-"/ck:cook implement user auth"
+"/cook implement user auth"
 → Mode: interactive (default, stops at review gates)
 
-"/ck:cook plans/260120-auth/phase-02-api.md"
+"/cook plans/260120-auth/phase-02-api.md"
 → Mode: code (path detected, stops at review gates)
 
-"/ck:cook quick fix for the login bug"
+"/cook quick fix for the login bug"
 → Mode: fast ("quick" keyword, stops at review gates)
 
-"/ck:cook implement auth, payments, notifications, shipping"
+"/cook implement auth, payments, notifications, shipping"
 → Mode: parallel (4 features, stops at review gates)
 
-"/ck:cook implement dashboard --fast"
+"/cook implement dashboard --fast"
 → Mode: fast (explicit flag, stops at review gates)
 
-"/ck:cook refactor auth middleware --tdd"
+"/cook refactor auth middleware --tdd"
 → Mode: interactive (default mode, with tests-first implementation behavior)
 
-"/ck:cook implement everything --auto"
+"/cook implement everything --auto"
 → Mode: auto (continuous only for low-risk, artifact-validated work)
 
-"/ck:cook implement dashboard trust me"
+"/cook implement dashboard trust me"
 → Mode: auto ("trust me" keyword, still stops on high-risk changes)
 ```
 
