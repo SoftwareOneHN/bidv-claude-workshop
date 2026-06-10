@@ -7,7 +7,7 @@ category: dev-tools
 keywords: [codebase, scouting, file-discovery, search]
 argument-hint: "[search-target] [ext]"
 metadata:
-  author: claudekit
+  author: Nam
   version: "1.0.0"
 ---
 

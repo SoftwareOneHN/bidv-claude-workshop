@@ -8,7 +8,7 @@ keywords: [ ideation, tradeoffs, debate, decisions ]
 license: MIT
 argument-hint: "[topic or problem]"
 metadata:
-    author: claudekit
+    author: Nam
     version: "2.2.1"
 ---
 

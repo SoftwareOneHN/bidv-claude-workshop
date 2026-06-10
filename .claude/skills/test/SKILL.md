@@ -7,7 +7,7 @@ category: utilities
 keywords: [test, unit, integration, e2e, coverage]
 argument-hint: "[context] OR ui [url]"
 metadata:
-  author: claudekit
+  author: Nam
   version: "1.0.0"
 ---
 

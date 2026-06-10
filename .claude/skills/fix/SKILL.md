@@ -7,7 +7,7 @@ category: utilities
 keywords: [bugfix, error, test-failure, CI, lint]
 argument-hint: "[issue] --auto|--review|--quick|--parallel"
 metadata:
-  author: claudekit
+  author: Nam
   version: "2.1.0"
 ---
 
