@@ -130,9 +130,36 @@ Sau 30 phút, bạn sẽ có:
 - Ở phần 3, test API và tìm bugs
 - Dùng Cowork hoặc Claude Code đều được
 
+## Skills có sẵn (Claude Code)
+
+Ngoài BMAD flow, repo này còn có các skills để thực hành:
+
+| Skill | Lệnh | Mô tả |
+|-------|-------|--------|
+| Brainstorm | `/brainstorm [câu hỏi]` | Phân tích ý tưởng, đánh giá trade-offs |
+| Plan | `/plan [task]` | Lập kế hoạch implementation |
+| Code | `/code [task]` | Implement feature step-by-step |
+| Test | `/test [endpoint]` | QA testing, tìm bugs, viết report |
+| Scout | `/scout [keyword]` | Tìm hiểu cấu trúc codebase |
+| Debug | `/debug [vấn đề]` | Tìm root cause, sửa bug |
+| Fix | `/fix [issue]` | Fix nhanh một issue cụ thể |
+
+**Ví dụ sử dụng:**
+```
+/brainstorm nên dùng database hay in-memory cho MVP?
+/plan thêm endpoint GET /loans/:id
+/code implement story 2 từ PRD
+/test POST /loans endpoint
+/debug POST /loans trả về 500
+```
+
+---
+
 ## Tham khảo
 
 - `cowork-prompts.md` — Prompts cho Claude Cowork (Desktop)
+- `.claude/skills/` — Skill definitions (brainstorm, plan, code, test, scout, debug, fix)
+- `.claude/commands/bmad/` — BMAD agents (analyst, pm, dev)
 - `examples/` — Output mẫu đã hoàn thành
 - `bmad-core/templates/` — Format cho các document
 - `CLAUDE.md` — Coding standards cho project
