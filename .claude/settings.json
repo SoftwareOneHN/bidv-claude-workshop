@@ -1,13 +1,18 @@
 {
   "permissions": {
     "allow": [
-      "mcp__playwright__*"
+      "mcp__playwright__*",
+      "mcp__context7__*"
     ]
   },
   "mcpServers": {
     "playwright": {
       "command": "npx",
       "args": ["@playwright/mcp@latest"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
     }
   }
 }
